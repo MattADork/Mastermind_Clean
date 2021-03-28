@@ -8,7 +8,6 @@ require_relative 'messages'
 def main
   explains_game
   random_code = spawn_random_code
-  print random_code
   if ask_to_create_own_code == "y"
     custom_game
   else

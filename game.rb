@@ -19,13 +19,19 @@ end
 def custom_game_computer
   turns = 1
   code = get_hidden_code
+  computer_accuracy = [[], []]
   while turns < 10000
-    guess = computer_guess(turns)
-    computer_accuracy = compare_computer(code, guess)
-    print_out_colored_array(guess)
-    print_exact_answers(computer_accuracy[0])
-    print_close_answers(computer_accuracy[1])
+    if turns == 1
+      print "Press [ENTER] to have the computer take a guess!"
+    end
     gets.chomp
+    guess = computer_guess(turns)
+    true_guess = guess_swap(computer_accuracy, guess)
+    computer_accuracy = compare_computer(code, true_guess)
+    print_out_colored_array(guess)
+    print_exact_answers(computer_accuracy[1][0])
+    print_close_answers(computer_accuracy[1][1])
+    puts "The computer has taken #{turns} turns so far"
     turns += 1
   end
 end
@@ -77,7 +83,7 @@ end
 
 def computer_guess(turns)
   string_turns = turns.to_s
-  puts "The computer has taken #{string_turns} turns so far"
+  # puts "The computer has taken #{string_turns} turns so far"
   return spawn_random_code
 end
 
@@ -118,27 +124,41 @@ end
 def compare_computer(code, guess)
   exact = 0
   close = 0
+  matches = []
   if code[0] == guess[0]
     exact += 1
     close -= 1
+    matches.push(code[0])
+  else
+    matches.push(0)
   end
   if code[1] == guess[1]
     exact += 1
     close -= 1
+    matches.push(code[1])
+  else
+    matches.push(0)
   end
   if code[2] == guess[2]
     exact += 1
     close -= 1
+    matches.push(code[2])
+  else
+    matches.push(0)
   end
   if code[3] == guess[3]
     exact += 1
     close -= 1
+    matches.push(code[3])
+  else
+    matches.push(0)
   end
   sorted_code = code.sort
   sorted_guess = guess.sort
   intersect = (sorted_code & sorted_guess).flat_map { |n| [n]*[sorted_code.count(n), sorted_guess.count(n)].min }
   close += intersect.length
   exact_close = [exact, close]
+  matches_and_close = [matches, exact_close]
   if guess[0] == code [0] and guess[1] == code [1] and guess[2] == code [2] and guess[3] == code [3]
     puts
     print_out_colored_array(guess)
@@ -146,7 +166,7 @@ def compare_computer(code, guess)
     puts "Congratulations! You won the game!"
     play_again
   end
-  return exact_close
+  return matches_and_close
 end
 
 def play_again
@@ -155,4 +175,20 @@ def play_again
   else
     exit
   end
+end
+
+def guess_swap(array, guess)
+  if array[0][0] != 0 and array[0][0] != nil
+    guess[0] = array[0][0]
+  end
+  if array[0][1] != 0 and array[0][1] != nil
+    guess[1] = array[0][1]
+  end
+  if array[0][2] != 0 and array[0][2] != nil
+    guess[2] = array[0][2]
+  end
+  if array[0][3] != 0 and array[0][3] != nil
+    guess[3] = array[0][3]
+  end
+  return guess
 end
