@@ -40,12 +40,23 @@ def custom_game_self
   turns = 0
   code = get_hidden_code
   while turns < 13
+    if turns > 0
+      puts "[Turn #{turns}/12]"
+    end
     guess = player_guess
     accuracy = compare(code, guess)
     print_out_colored_array(guess)
     print_exact_answers(accuracy[0])
     print_close_answers(accuracy[1])
     turns += 1
+  end
+  puts
+  puts "The correct answer was:"
+  print_out_colored_array(code)
+  if ask_to_play_again == "y"
+    return main
+  else
+    exit
   end
 end
 
@@ -58,15 +69,25 @@ def custom_game
 end
 
 def random_game(code)
-  turns = 1
+  turns = 0
   while turns < 13
-    puts "[Turn #{turns}/12]"
+    if turns > 0
+      puts "[Turn #{turns}/12]"
+    end
     guess = player_guess
     accuracy = compare(code, guess)
     print_out_colored_array(guess)
     print_exact_answers(accuracy[0])
     print_close_answers(accuracy[1])
     turns += 1
+  end
+  puts
+  puts "The correct answer was:"
+  print_out_colored_array(code)
+  if ask_to_play_again == "y"
+    return main
+  else
+    exit
   end
 end
 

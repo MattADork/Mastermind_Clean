@@ -40,6 +40,11 @@ def ask_to_play_again
   return gets.chomp.downcase
 end
 
+def sorry_you_lose
+  puts "Sorry... All out of guesses, you've lost the game!"
+  ask_to_play_again
+end
+
 def print_exact_answers(int)
   print "     "
   print "X ".green * int
