@@ -31,7 +31,11 @@ def custom_game_computer
     print_out_colored_array(guess)
     print_exact_answers(computer_accuracy[1][0])
     print_close_answers(computer_accuracy[1][1])
-    puts "The computer has taken #{turns} turns so far"
+    if turns == 1
+      puts "The computer has taken #{turns} turn so far"
+    else
+      puts "The computer has taken #{turns} turns so far"
+    end
     turns += 1
   end
 end
