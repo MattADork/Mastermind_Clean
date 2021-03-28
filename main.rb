@@ -6,10 +6,14 @@ require_relative 'color'
 require_relative 'messages'
 
 def main
-  game_over = false
   explains_game
   random_code = spawn_random_code
-  print_out_colored_array(random_code)
+  print random_code
+  if ask_to_create_own_code == "y"
+    custom_game
+  else
+    random_game(random_code)
+  end
 end
 
 load_game_message

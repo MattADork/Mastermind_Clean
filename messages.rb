@@ -1,3 +1,7 @@
+def prompt
+  print '> '
+end
+
 def explains_game
   puts
   puts "Each X represents an exact match"
@@ -13,4 +17,34 @@ def load_game_message
   puts "of how many EXACT matches you have, and how many"
   puts "correct values you have in the wrong place."
   puts
+end
+
+def ask_to_create_own_code
+  puts
+  puts "Do you want to create your own code? (y/n)"
+  prompt
+  return gets.chomp.downcase
+end
+  
+def ask_if_computer_solving
+  puts
+  puts "Do you want the computer to solve your code?"
+  prompt
+  return gets.chomp.downcase
+end
+
+def ask_to_play_again
+  puts
+  puts "Do you want to play again? (y/n)"
+  prompt
+  return gets.chomp.downcase
+end
+
+def print_exact_answers(int)
+  print "     "
+  print "X ".green * int
+end
+
+def print_close_answers(int)
+  print "X ".yellow * int
 end

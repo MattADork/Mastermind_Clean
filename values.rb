@@ -42,8 +42,33 @@ def convert_to_letters(array)
 end
 
 def space_out_code(array)
-  spaced_array = array.map do |value|
+  edited_array = array.map { |word| word.gsub('  ', '') }
+  spaced_array = edited_array.map do |value|
     value = "  " + value + "  "
   end
   return spaced_array
+end
+
+def check_code(string)
+  string_split = string.split("")
+  string_split.each do |value|
+    if value == "A" or value == "B" or value == "C" or value == "D" or value == "E" or value == "F"
+    else
+      puts "Hey, I told you, only letters A through F are allowed!"
+      return get_hidden_code
+    end
+  end
+  return string_split
+end
+
+def check_guess(string)
+  string_split = string.split("")
+  string_split.each do |value|
+    if value == "A" or value == "B" or value == "C" or value == "D" or value == "E" or value == "F"
+    else
+      puts "Hey, I told you, only letters A through F are allowed!"
+      return player_guess
+    end
+  end
+  return string_split
 end
